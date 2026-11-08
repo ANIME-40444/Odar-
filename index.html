@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment & Order Confirmation</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #080d18;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  background: #111b2d;
+  border: 1px solid #263650;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 15px 50px #0008;
+}
+
+.logo {
+  text-align: center;
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.logo span {
+  color: #38d9a9;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #9eabc0;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.amount {
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  color: #38d9a9;
+  margin: 20px 0;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  background: #081222;
+  border: 1px solid #34445e;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  font-size: 15px;
+  margin: 10px 0 15px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #38d9a9;
+  color: #07150f;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: .85;
+}
+
+.hidden {
+  display: none;
+}
+
+.demo-label {
+  text-align: center;
+  color: #ffc857;
+  background: #3a2c12;
+  border: 1px solid #806326;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.success-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #38d9a9;
+  color: #061a13;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 43px;
+  margin: 20px auto;
+}
+
+.status {
+  text-align: center;
+  color: #38d9a9;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.details {
+  background: #091426;
+  border: 1px solid #283952;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 22px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #25334a;
+  font-size: 13px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row span:first-child {
+  color: #9eabc0;
+}
+
+.detail-row span:last-child {
+  text-align: right;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.processing {
+  margin-top: 20px;
+  padding: 15px;
+  background: #17263b;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.processing strong {
+  color: #38d9a9;
+}
+
+.footer {
+  text-align: center;
+  color: #74839b;
+  font-size: 11px;
+  margin-top: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAYMENT PAGE -->
+<div class="container" id="paymentPage">
+
+  <div class="logo">BOOST<span>ZONE</span></div>
+
+  <div class="demo-label">
+    DEMO PAYMENT INTERFACE — NOT A REAL PAYMENT GATEWAY
+  </div>
+
+  <h2>Payment Details</h2>
+  <p class="subtitle">Enter a transaction reference for this demo order.</p>
+
+  <div class="amount">৳405.00</div>
+
+  <label>Transaction ID</label>
+  <input
+    type="text"
+    id="transactionId"
+    placeholder="Enter Transaction ID"
+  >
+
+  <button onclick="showOrder()">
+    Continue →
+  </button>
+
+  <div class="footer">
+    Demo interface. No payment is processed or verified.
+  </div>
+</div>
+
+
+<!-- ORDER CONFIRMATION PAGE -->
+<div class="container hidden" id="orderPage">
+
+  <div class="logo">BOOST<span>ZONE</span></div>
+
+  <div class="demo-label">
+    DEMO ORDER RECEIPT — NOT PAYMENT CONFIRMATION
+  </div>
+
+  <div class="success-icon">✓</div>
+
+  <h2>Order Details Received</h2>
+
+  <p class="status">DEMO ORDER CREATED</p>
+
+  <div class="amount">৳405.00</div>
+
+  <p class="subtitle">
+    Your demo order information is displayed below.
+  </p>
+
+  <div class="details">
+
+    <div class="detail-row">
+      <span>Order ID</span>
+      <span>TK6984</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Service Name</span>
+      <span>TikTok Boost 6984</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Account</span>
+      <span>__yours_sam</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Video Boost</span>
+      <span>
+        <a href="https://vt.tiktok.com/ZSpSN63FE/"
+           target="_blank" style="color:#38d9a9">
+          View Video ↗
+        </a>
+      </span>
+    </div>
+
+    <div class="detail-row">
+      <span>Total Views</span>
+      <span>8K–10K</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Likes</span>
+      <span>2K+</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Comments</span>
+      <span>Few</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Shares</span>
+      <span>Few</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Favourites</span>
+      <span>Few</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Card Number</span>
+      <span>7643 **** 9742</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Transaction ID</span>
+      <span id="displayTransaction">-</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Order Amount</span>
+      <span style="color:#38d9a9">৳405.00</span>
+    </div>
+
+    <div class="detail-row">
+      <span>Order Status</span>
+      <span>DEMO</span>
+    </div>
+
+  </div>
+
+  <div class="processing">
+    <strong>Estimated Processing Time</strong>
+    <br>
+    5–10 Hours
+    <br>
+    <small style="color:#9eabc0">
+      Estimated only. Actual delivery is not verified.
+    </small>
+  </div>
+
+  <button style="margin-top:20px"
+          onclick="window.print()">
+    Print Demo Receipt
+  </button>
+
+  <button style="margin-top:10px;background:#263650;color:white"
+          onclick="goBack()">
+    ← Back
+  </button>
+
+  <div class="footer">
+    BOOSTZONE • DEMO ORDER RECEIPT
+  </div>
+
+</div>
+
+<script>
+
+function showOrder() {
+  const transaction = document
+    .getElementById("transactionId")
+    .value.trim();
+
+  if (!transaction) {
+    alert("Please enter a Transaction ID!");
+    return;
+  }
+
+  document.getElementById("displayTransaction")
+    .textContent = transaction;
+
+  document.getElementById("paymentPage")
+    .classList.add("hidden");
+
+  document.getElementById("orderPage")
+    .classList.remove("hidden");
+
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  document.getElementById("orderPage")
+    .classList.add("hidden");
+
+  document.getElementById("paymentPage")
+    .classList.remove("hidden");
+
+  window.scrollTo(0, 0);
+}
+
+</script>
+
+</body>
+</html>
