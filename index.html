@@ -87,7 +87,7 @@ input {
   color: white;
   border-radius: 11px;
   outline: none;
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 18px;
 }
 
@@ -251,7 +251,7 @@ button:hover { opacity: .85; }
 
   <h2>Payment Portal</h2>
   <p class="subtitle">
-    Enter your transaction reference to continue.
+    Enter your transaction reference and video link.
   </p>
 
   <div class="amount">৳405.00</div>
@@ -261,6 +261,15 @@ button:hover { opacity: .85; }
     type="text"
     id="transactionInput"
     placeholder="Enter Transaction ID"
+    autocomplete="off"
+  >
+
+  <label>TikTok Video Link</label>
+  <input
+    type="url"
+    id="videoInput"
+    placeholder="https://vt.tiktok.com/..."
+    autocomplete="off"
   >
 
   <button onclick="continueOrder()">
@@ -302,7 +311,7 @@ button:hover { opacity: .85; }
 
     <div class="detail-row">
       <span>Order ID</span>
-      <span>TK6984</span>
+      <span id="orderId">TK6984</span>
     </div>
 
     <div class="detail-row">
@@ -319,8 +328,12 @@ button:hover { opacity: .85; }
       <span>Video Link</span>
       <span>
         <a class="video-link"
-        href="https://vt.tiktok.com/ZSpSN63FE/"
-        target="_blank">View Video ↗</a>
+           id="videoDisplay"
+           href="#"
+           target="_blank"
+           rel="noopener noreferrer">
+          View Video ↗
+        </a>
       </span>
     </div>
 
@@ -390,7 +403,7 @@ button:hover { opacity: .85; }
   </div>
 
   <button style="margin-top:20px"
-  onclick="window.print()">
+          onclick="window.print()">
     Print Order Details
   </button>
 
@@ -413,14 +426,50 @@ function continueOrder() {
     .getElementById("transactionInput")
     .value.trim();
 
+  const video = document
+    .getElementById("videoInput")
+    .value.trim();
+
   if (!transaction) {
     alert("Please enter your Transaction ID.");
     return;
   }
 
+  if (!video) {
+    alert("Please enter your TikTok Video Link.");
+    return;
+  }
+
+  let videoURL;
+
+  try {
+    videoURL = new URL(video);
+
+    if (
+      videoURL.protocol !== "https:" &&
+      videoURL.protocol !== "http:"
+    ) {
+      throw new Error("Invalid protocol");
+    }
+
+  } catch (error) {
+    alert("Please enter a valid video URL.");
+    return;
+  }
+
+  // Display entered transaction ID
   document.getElementById("transactionDisplay")
     .textContent = transaction;
 
+  // Display the entered video link
+  const videoButton = document.getElementById("videoDisplay");
+  videoButton.href = videoURL.href;
+
+  // Generate a new reference for each submission
+  document.getElementById("orderId").textContent =
+    "TK" + Date.now().toString().slice(-8);
+
+  // Switch pages
   document.getElementById("paymentPage")
     .classList.add("hidden");
 
